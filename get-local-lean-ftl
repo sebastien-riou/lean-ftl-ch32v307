@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -ex
+
+RELEASE_PACKAGE=$1
+
+
+DISTDIR=`pwd`/lean-ftl-dist
+echo "DISTDIR: $DISTDIR"
+
+rm -rf $DISTDIR
+mkdir $DISTDIR
+
+if [ -z "$RELEASE_PACKAGE" ]; then
+    #assume the lean-ftl repo is cloned in ../lean-ftl (it can be just a link to the actual location)
+    LFTL_ROOT=../lean-ftl
+    echo "INFO: build locally a release"
+    VERSION=local
+    RELEASE_PACKAGE=$DISTDIR/lean-ftl-${VERSION}
+    cd $LFTL_ROOT
+    ./build-release 0 $RELEASE_PACKAGE
+    RELEASE_PACKAGE=${RELEASE_PACKAGE}.tar.gz
+fi
+
+cd $DISTDIR
+tar -xf $RELEASE_PACKAGE
+mv dist/liblean-ftl-test . 
+tar -xf dist/liblean-ftl-debug.tar.gz
+mv liblean-ftl debug
+tar -xf dist/liblean-ftl-minSizeRel.tar.gz
+mv liblean-ftl minSizeRel
