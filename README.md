@@ -1,5 +1,5 @@
 # lean-ftl-ch32v307
-Testbench for [lean-ftl](https://github.com/sebastien-riou/lean-ftl) on CH32V307 evaluation board.
+Testbench for [lean-ftl](https://github.com/sebastien-riou/lean-ftl) on CH32V307 evaluation board (WCH CH32V307V-EVT-R1).
 
 ## How to build
 ````
